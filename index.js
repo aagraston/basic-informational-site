@@ -1,13 +1,21 @@
 #!/usr/bin/node
 require('dotenv').config()
 const http = require('http')
+const fs = require('fs')
+const url = require('url')
 
 const port = process.env.PORT || 3000
 
 const server = http.createServer((req, res) => {
-  res.statusCode = 200
-  res.setHeader('Content-Type', 'text/html')
-  res.end('<h1>Hello World</h1>')
+  
+  //getting the filename from the url
+  let q = url.parse(req.url, true)
+  let fileName = `.${q.pathname}`
+  if (fileName === './') {
+    filename = './index.html'
+  }
+
+
 })
 
 server.listen(port, () => {
